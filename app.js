@@ -10,6 +10,7 @@ import notFoundMid from "./middleware/not-found.js";
 import errorHandlerMid from "./middleware/error-handler.js";
 import path from "path";
 import url from "url";
+import cors from "cors";
 
 //__dirname and __filename are not used in ESM, this is a workaround
 const __filename = url.fileURLToPath(import.meta.url);
@@ -31,6 +32,7 @@ app.get("*", (req, res) => {
 
 app.use(notFoundMid);
 app.use(errorHandlerMid);
+app.use(cors());
 
 const port = process.env.PORT || 5174;
 
