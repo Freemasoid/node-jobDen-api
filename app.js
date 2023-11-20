@@ -12,6 +12,11 @@ import path from "path";
 import url from "url";
 import cors from "cors";
 
+let corsOptions = {
+  origin: "*",
+  optionSuccessStatus: 200,
+};
+
 //__dirname and __filename are not used in ESM, this is a workaround
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,6 +24,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, "./client/build")));
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(helmet());
 
@@ -32,7 +38,6 @@ app.get("*", (req, res) => {
 
 app.use(notFoundMid);
 app.use(errorHandlerMid);
-app.use(cors());
 
 const port = process.env.PORT || 5174;
 
