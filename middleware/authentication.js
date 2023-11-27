@@ -11,7 +11,7 @@ const authMid = async (req, res, next) => {
 
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-    const testUser = (payload.userID = "65650f0721d2576f35e79c23");
+    const testUser = payload.userID === "65650f0721d2576f35e79c23";
     req.user = { userID: payload.userID, testUser };
     next();
   } catch (error) {
