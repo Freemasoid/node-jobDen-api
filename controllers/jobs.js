@@ -97,7 +97,7 @@ const deleteJob = async (req, res) => {
     params: { id: jobID },
   } = req;
 
-  const job = await Job.findOneAndRemove({
+  const job = await Job.findByIdAndRemove({
     _id: jobID,
     createdBy: userID,
   });
